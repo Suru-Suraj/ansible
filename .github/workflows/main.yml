@@ -20,5 +20,8 @@ jobs:
       - name: Install Ansible
         run: pip install ansible
 
+      - name: Disable host key checking for Ansible
+        run: export ANSIBLE_HOST_KEY_CHECKING="False"
+
       - name: Run Ansible playbook
         run: ansible-playbook -o StrictHostKeyChecking=no -i inventory.ymlplaybook.yml
