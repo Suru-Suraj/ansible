@@ -26,6 +26,9 @@ jobs:
       - name: Set Ansible roles search path
         run: export ANSIBLE_ROLES_PATH="${{github.workspace}}/roles:/etc/ansible/roles"
 
+      - name: Install PostgreSQL collection
+        run: ansible-galaxy collection install community.postgresql
+
       - name: Run Ansible playbook
         run: |
           ansible-playbook -i inventory.yml playbook.yml
