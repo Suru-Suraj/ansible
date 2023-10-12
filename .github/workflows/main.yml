@@ -19,16 +19,6 @@ jobs:
 
       - name: Install Ansible
         run: pip install ansible
-    
-      - name: Set Ansible roles search path
-        run: export ANSIBLE_ROLES_PATH="/home/runner/work/ansible/roles:/etc/ansible/roles"
-
-      - name: Set Ansible roles search path
-        run: export ANSIBLE_ROLES_PATH="${{github.workspace}}/roles:/etc/ansible/roles"
-
-      - name: Install PostgreSQL collection
-        run: ansible-galaxy collection install community.postgresql
 
       - name: Run Ansible playbook
-        run: |
-          ansible-playbook -i inventory.yml playbook.yml
+        run: ansible-playbook -o StrictHostKeyChecking=no -i inventory.ymlplaybook.yml
