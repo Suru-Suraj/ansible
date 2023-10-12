@@ -1,0 +1,20 @@
+name: Copy public key and run Ansible playbook
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Ansible
+        run: sudo apt install ansible
+
+      - name: Run Ansible playbook
+        run: |
+          ansible-playbook playbook.yml
