@@ -21,7 +21,7 @@ jobs:
         run: pip install ansible
     
       - name: Set Ansible roles search path
-        run: export ANSIBLE_ROLES_PATH="${{github.workspace}}/roles:/etc/ansible/roles"
+        run: export ANSIBLE_ROLES_PATH="/home/runner/work/ansible/roles:/etc/ansible/roles"
 
       - name: Run Ansible playbook
         run: |
