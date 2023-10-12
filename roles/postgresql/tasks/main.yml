@@ -1,0 +1,15 @@
+---
+- name: Install PostgreSQL
+  apt:
+    name: postgresql-{{ postgresql_version }}
+    state: present
+- name: Initialize PostgreSQL
+  postgresql_initdb:
+    name: postgres
+    port: 5432
+    user: postgres
+- name: Start PostgreSQL service
+  service:
+    name: postgresql
+    state: started
+    enabled: yes

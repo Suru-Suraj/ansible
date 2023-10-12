@@ -1,0 +1,4 @@
+---
+# vars file for mysql
+postgresql_version: 15
+postgresql_install_dir: /opt/postgresql

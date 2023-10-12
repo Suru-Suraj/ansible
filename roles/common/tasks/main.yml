@@ -1,2 +1,11 @@
 ---
-# tasks file for common
+- name: Install cache package
+  package:
+    name: memcached
+    state: present
+
+- name: Start cache service
+  service:
+    name: memcached
+    state: started
+    enabled: yes

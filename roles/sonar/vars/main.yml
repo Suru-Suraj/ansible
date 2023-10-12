@@ -1,2 +1,2 @@
 ---
-# vars file for sonar
+sonar_link: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-latest.zip

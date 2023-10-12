@@ -1,2 +1,55 @@
 ---
-# tasks file for sonar
+- name: Install Java
+  package:
+    name: openjdk-11-jdk
+    state: present
+
+- name: Create SonarQube user and group
+  group:
+    name: sonar
+    state: present
+
+- name: Create SonarQube directory
+  file:
+    path: /opt/sonar
+    state: directory
+    owner: sonar
+    group: sonar
+    mode: 0755
+
+- name: Download SonarQube
+  get_url:
+    url: {{ sonar_link }}
+    dest: /opt/sonar/sonarqube.zip
+    checksum: true
+
+- name: Unzip SonarQube
+  unarchive:
+    src: /opt/sonar/sonarqube.zip
+    dest: /opt/sonar
+    owner: sonar
+    group: sonar
+
+- name: Make SonarQube executable
+  file:
+    src: /opt/sonar/bin/sonar.sh
+    dest: /opt/sonar/bin/sonar
+    owner: sonar
+    group: sonar
+    mode: 0755
+
+- name: Create SonarQube service
+  systemd:
+    name: sonar
+    state: present
+    enabled: true
+    service: /opt/sonar/bin/sonar
+    args: start
+
+- name: Configure SonarQube to use PostgreSQL database
+  lineinfile:
+    path: /opt/sonar/conf/sonar.properties
+    line: sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonar
+    insertbefore: sonar.jdbc.username=sonar
+    owner: sonar
+    group: sonar
